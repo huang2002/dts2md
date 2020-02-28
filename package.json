@@ -1,0 +1,44 @@
+{
+  "name": "dts2md",
+  "version": "0.1.0",
+  "description": "An API reference generator for TypeScript.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "node ./js/cli.js -li ./types -o ./docs -I Home.md -- * !index.d.ts !cli.d.ts",
+    "help": "node ./js/cli.js -h"
+  },
+  "repository": "huang2002/dts2md",
+  "keywords": [
+    "dts",
+    "md",
+    "typescript",
+    "ts",
+    "markdown",
+    "api",
+    "reference",
+    "doc",
+    "generate",
+    "generator",
+    "3h"
+  ],
+  "author": "3h",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/huang2002/dts2md/issues"
+  },
+  "homepage": "https://github.com/huang2002/dts2md#readme",
+  "devDependencies": {
+    "@types/node": "^13.7.4",
+    "typescript": "^3.8.2"
+  },
+  "dependencies": {
+    "3h-cli": "^2.0.0",
+    "fast-glob": "^3.2.2",
+    "pave-path": "^0.2.0"
+  },
+  "files": [
+    "js",
+    "types"
+  ]
+}
