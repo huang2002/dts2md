@@ -51,6 +51,14 @@ export namespace Reducers {
         code.replace(DECLARE_PATTERN, '')
     );
 
+    const PRIVATE_PATTERN = /^\s*private\s+\w+.+\s*$/mg;
+    /**
+     * Remove private properties/methods
+     */
+    export const rmPrivate: TransformReducer = code => (
+        code.replace(PRIVATE_PATTERN, '')
+    );
+
     const INLINE_COMMENT_PATTERN = /\s*\/\/.*$|^\s*\/\/.*$/mg;
     /**
      * Remove inline comments (// ...)
@@ -86,7 +94,12 @@ export namespace Reducers {
 
     const EXTRA_BREAK_PATTERN = /(?:\s*\n){3,}/g;
     /**
-     * Remove extra line breaks
+     * Remove all line breaks
+     * (you can place this reducer after all other
+     * removal reducers and append `transformBreaks`
+     * after this to transform break marks to line
+     * breaks while removing other line breaks created
+     * by other removal reducers)
      */
     export const rmExtraBreaks: TransformReducer = code => (
         code.replace(EXTRA_BREAK_PATTERN, '\n\n')

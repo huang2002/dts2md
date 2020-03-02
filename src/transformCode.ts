@@ -9,6 +9,7 @@ export const defaultReducers = [
     Reducers.rmExport,
     Reducers.rmRef,
     Reducers.rmDeclare,
+    Reducers.rmPrivate,
     Reducers.rmInlineComments,
     Reducers.transformBreaks,
     Reducers.rmExtraBreaks,
