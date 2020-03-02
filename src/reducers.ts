@@ -27,7 +27,7 @@ export namespace Reducers {
     );
 
     const EXPORT_PATTERN =
-        /^export\s*\{.*\};?\s*$|^export.+from\s*(?:".*"|'.*');?\s*$|^export /mg;
+        /^export\s*\{.*\};?\s*$|^export.+from\s*(?:".*"|'.*');?\s*$|^\s*export /mg;
     /**
      * Remove export prefixes
      */
@@ -43,7 +43,8 @@ export namespace Reducers {
         code.replace(REFERENCE_PATTERN, '')
     );
 
-    const DECLARE_PATTERN = /declare /g;
+    const DECLARE_PATTERN =
+        /declare (?=class|function|const|let|var|interface|type|namespace|enum)/g;
     /**
      * Remove declare prefixes
      */
@@ -61,7 +62,7 @@ export namespace Reducers {
 
     const INLINE_COMMENT_PATTERN = /\s*\/\/.*$|^\s*\/\/.*$/mg;
     /**
-     * Remove inline comments (// ...)
+     * Remove inline comments
      */
     export const rmInlineComments: TransformReducer = code => (
         code.replace(INLINE_COMMENT_PATTERN, '')
@@ -92,7 +93,7 @@ export namespace Reducers {
         code.replace(BREAK_PATTERN, '\n')
     );
 
-    const EXTRA_BREAK_PATTERN = /(?:\s*\n){3,}/g;
+    const LINE_BREAK_PATTERN = /(?:\s*\n){2,}/g;
     /**
      * Remove all line breaks
      * (you can place this reducer after all other
@@ -101,8 +102,8 @@ export namespace Reducers {
      * breaks while removing other line breaks created
      * by other removal reducers)
      */
-    export const rmExtraBreaks: TransformReducer = code => (
-        code.replace(EXTRA_BREAK_PATTERN, '\n\n')
+    export const rmLineBreaks: TransformReducer = code => (
+        code.replace(LINE_BREAK_PATTERN, '\n\n')
     );
 
 }

@@ -12,7 +12,7 @@ export const defaultReducers = [
     Reducers.rmPrivate,
     Reducers.rmInlineComments,
     Reducers.transformBreaks,
-    Reducers.rmExtraBreaks,
+    Reducers.rmLineBreaks,
     Reducers.rmStartSpaces,
     Reducers.rmEndSpaces,
 ];
