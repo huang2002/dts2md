@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0
+
+- Remove `--keep-ext` command line option
+- Add index composer
+
 ## 0.2.0
 
 - Add `rmPrivate` reducer
