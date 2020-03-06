@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+- Fix help info in `README.md`
+
 ## 0.3.0
 
 - Remove `--keep-ext` command line option
