@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2
+
+- Fix `--index` option
+
 ## 0.3.1
 
 - Fix help info in `README.md`
