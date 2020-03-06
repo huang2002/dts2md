@@ -62,7 +62,9 @@ program
             inputRoot: args.getOption('--input')[0],
             outputRoot,
             encoding: args.getOption('--encoding')[0],
-            indexFile: args.getOption('--index')[0],
+            indexFile: options.has('--index')
+                ? options.get('--index')![0]
+                : defaults.index,
         }).then(result => {
             if (options.has('--log')) {
                 result.entries.forEach(result => {
