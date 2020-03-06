@@ -24,7 +24,6 @@ Options:
   --output, -o <dir>            The output root
   --log, -l                     Log transform info
   --index, -I [file]            Generate an index file (default file name: API.md)
-  --keep-ext                    Keep file extensions of links in the index file
   --encoding, -e <encoding>     The encoding of source files (default: utf8)
   --help, -h                    Show help info
   -- <globs...>                 Source file globs (default: *)
