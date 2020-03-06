@@ -1,6 +1,6 @@
 {
   "name": "dts2md",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "An API reference generator for TypeScript.",
   "main": "index.js",
   "bin": "js/cli.js",
