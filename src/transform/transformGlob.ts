@@ -2,20 +2,12 @@ import fastGlob from 'fast-glob';
 import pavePath from 'pave-path';
 import { TransformFileOptions, transformFile } from './transformFile';
 import { join, dirname, basename } from 'path';
+import { promises as fsPromises } from "fs";
+import { IndexComposer, composeIndex, TransformEntry } from '../composer/composeIndex';
 
 export interface TransformGlobResult {
-    /**
-     * The path of the source file
-     */
-    source: string;
-    /**
-     * The path of the destination file
-     */
-    destination: string;
-    /**
-     * The file name
-     */
-    name: string;
+    entries: TransformEntry[];
+    indexFile?: string;
 }
 /** dts2md break */
 export interface TransformGlobOptions extends TransformFileOptions {
@@ -31,6 +23,16 @@ export interface TransformGlobOptions extends TransformFileOptions {
      * The root directory of output files
      */
     outputRoot?: string;
+    /**
+     * The index file name
+     * (only generates the index file
+     * if this option is given)
+     */
+    indexFile?: string;
+    /**
+     * The index file composer
+     */
+    indexComposer?: IndexComposer;
 }
 /** dts2md break */
 /**
@@ -43,20 +45,34 @@ export const transformGlob = (
 ) => fastGlob(glob, {
     ...options.globOptions,
     cwd: options.inputRoot
-}).then(async files => {
+}).then<TransformGlobResult>(async files => {
+
     const outputRoot = options.outputRoot || process.cwd();
+
     await pavePath(outputRoot);
-    return await Promise.all(
-        files.map(async (fileName): Promise<TransformGlobResult> => {
-            const source = options.inputRoot ? join(options.inputRoot, fileName) : fileName,
-                destination = join(outputRoot, fileName.slice(0, -4) + 'md');
-            await pavePath(dirname(fileName), outputRoot);
+
+    const entries = await Promise.all(
+        files.map(async (path): Promise<TransformEntry> => {
+            const source = options.inputRoot ? join(options.inputRoot, path) : path,
+                destination = join(outputRoot, path.slice(0, -4) + 'md');
+            await pavePath(dirname(path), outputRoot);
             await transformFile(source, destination);
             return {
+                path: path.slice(0, -5),
                 source,
                 destination,
                 name: basename(destination).slice(0, -3),
             };
         })
     );
+
+    const indexFile = options.indexFile && join(outputRoot, options.indexFile);
+
+    if (indexFile) {
+        const indexComposer = options.indexComposer || composeIndex;
+        await fsPromises.writeFile(indexFile, indexComposer(entries));
+    }
+
+    return { entries, indexFile };
+
 });

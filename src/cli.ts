@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 import { Program } from '3h-cli';
-import { transformGlob } from './transformGlob';
-import { promises as fsPromises } from "fs";
-import { join } from 'path';
+import { transformGlob } from './transform/transformGlob';
 
 const defaults = {
     glob: '*',
@@ -38,10 +36,6 @@ program
         help: `Generate an index file (default file name: ${defaults.index})`
     })
     .option({
-        name: '--keep-ext',
-        help: 'Keep file extensions of links in the index file'
-    })
-    .option({
         name: '--encoding',
         alias: '-e',
         value: '<encoding>',
@@ -67,28 +61,16 @@ program
         return transformGlob(glob, {
             inputRoot: args.getOption('--input')[0],
             outputRoot,
-            encoding: args.getOption('--encoding')[0]
-        }).then(results => {
+            encoding: args.getOption('--encoding')[0],
+            indexFile: args.getOption('--index')[0],
+        }).then(result => {
             if (options.has('--log')) {
-                results.forEach(result => {
+                result.entries.forEach(result => {
                     console.log(`${result.name}: ${result.source} -> ${result.destination}`);
                 });
-            }
-            if (options.has('--index')) {
-                const indexFile = options.get('--index')![0] || defaults.index,
-                    indexFilePath = join(outputRoot, indexFile),
-                    keepExt = options.has('--keep-ext'),
-                    index = results.map(result => {
-                        const { name } = result,
-                            link = keepExt ? name + '.md' : name;
-                        return `- [${name}](${link})`;
-                    }).join('\n');
-                return fsPromises.writeFile(
-                    indexFilePath,
-                    `# API Reference\n\n${index}\n`
-                ).then(() => {
-                    console.log('index: ' + indexFilePath);
-                });
+                if (result.indexFile) {
+                    console.log('index: ' + result.indexFile);
+                }
             }
         });
     })

@@ -1,7 +1,7 @@
 import { TransformReducer } from './reducers';
 import { transformCode } from './transformCode';
 import { promises as fsPromises } from 'fs';
-import { Composer, compose } from './compose';
+import { Composer, compose } from '../composer/compose';
 import { basename } from 'path';
 
 export interface TransformFileOptions {
