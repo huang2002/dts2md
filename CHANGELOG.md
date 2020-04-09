@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+- Modify the style of cli
+
 ## 0.3.3
 
 - Fix `--index` option
