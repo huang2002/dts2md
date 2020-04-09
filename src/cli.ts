@@ -12,6 +12,10 @@ const program = new Program('dts2md', {
 });
 
 program
+    .action({
+        name: 'globs...',
+        help: `Source file globs (default: ${defaults.glob})`
+    })
     .option({
         name: '--input',
         alias: '-i',
@@ -46,17 +50,13 @@ program
         alias: '-h',
         help: 'Show help info'
     })
-    .rest({
-        value: '<globs...>',
-        help: `Source file globs (default: ${defaults.glob})`
-    })
     .parse(process.argv)
     .then(args => {
         const { options } = args;
         if (options.has('--help')) {
             return program.help();
         }
-        const glob = args.rest.length ? args.rest : defaults.glob,
+        const glob = args.actions.length ? args.actions : defaults.glob,
             outputRoot = args.getOption('--output')[0];
         return transformGlob(glob, {
             inputRoot: args.getOption('--input')[0],

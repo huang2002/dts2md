@@ -17,7 +17,10 @@ $ dts2md --help
 Generate API reference from your type declaration files.
 
 Usage:
-  dts2md [options] -- <globs...>
+  dts2md <action> [options]
+
+Actions:
+  <globs...>                    Source file globs (default: *)
 
 Options:
   --input, -i <dir>             The input root
@@ -26,7 +29,6 @@ Options:
   --index, -I [file]            Generate an index file (default file name: API.md)
   --encoding, -e <encoding>     The encoding of source files (default: utf8)
   --help, -h                    Show help info
-  -- <globs...>                 Source file globs (default: *)
 
 ```
 
