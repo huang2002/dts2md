@@ -1,12 +1,12 @@
 {
   "name": "dts2md",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "An API reference generator for TypeScript.",
   "main": "index.js",
   "bin": "js/cli.js",
   "scripts": {
     "build": "tsc",
-    "test": "node ./js/cli.js -li ./types -o ./docs -I Home.md -- ** !index.d.ts !cli.d.ts",
+    "test": "node ./js/cli.js ** !index.d.ts !cli.d.ts -li ./types -o ./docs -I Home.md",
     "help": "node ./js/cli.js -h"
   },
   "repository": "huang2002/dts2md",
