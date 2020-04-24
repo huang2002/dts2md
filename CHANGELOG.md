@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+- Fix inline comment pattern
+
 ## 0.4.0
 
 - Modify the style of cli
