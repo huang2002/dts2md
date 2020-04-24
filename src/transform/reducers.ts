@@ -60,7 +60,7 @@ export namespace Reducers {
         code.replace(PRIVATE_PATTERN, '')
     );
 
-    const INLINE_COMMENT_PATTERN = /\s*\/\/.*$|^\s*\/\/.*$/mg;
+    const INLINE_COMMENT_PATTERN = /^\s*\/\/.*$/mg;
     /**
      * Remove inline comments
      */
