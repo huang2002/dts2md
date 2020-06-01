@@ -39,13 +39,20 @@ export interface TransformGlobOptions extends TransformFileOptions {
  * Transform multiple files using glob
  * (using `fast-glob` package internally)
  */
-export const transformGlob = (
+export const transformGlob = async (
     glob: string | string[],
     options: TransformGlobOptions = {}
-) => fastGlob(glob, {
-    ...options.globOptions,
-    cwd: options.inputRoot
-}).then<TransformGlobResult>(async files => {
+) => {
+
+    /**
+     * HACK: the async glob doesn't seem to
+     * work well in my Termux terminal, so
+     * sync glob is used here
+     */
+    const files = fastGlob.sync(glob, {
+        ...options.globOptions,
+        cwd: options.inputRoot
+    });
 
     const outputRoot = options.outputRoot || process.cwd();
 
@@ -75,4 +82,4 @@ export const transformGlob = (
 
     return { entries, indexFile };
 
-});
+};
