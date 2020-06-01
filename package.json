@@ -6,7 +6,7 @@
   "bin": "js/cli.js",
   "scripts": {
     "build": "tsc",
-    "test": "node ./js/cli.js ** !index.d.ts !cli.d.ts -li ./types -o ./docs -I Home.md",
+    "test": "node ./js/cli.js '**' '!index.d.ts' '!cli.d.ts' -li ./types -o ./docs -I Home.md",
     "help": "node ./js/cli.js -h"
   },
   "repository": "huang2002/dts2md",
