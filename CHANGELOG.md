@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3
+
+- Fix export pattern
+
 ## 0.4.2
 
 - Fix glob issue
