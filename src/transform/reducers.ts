@@ -27,7 +27,7 @@ export namespace Reducers {
     );
 
     const EXPORT_PATTERN =
-        /^export\s*\{.*\};?\s*$|^export.+from\s*(?:".*"|'.*');?\s*$|^\s*export /mg;
+        /^\s*export\s*\{.*\};?\s*$|^\s*export.+from\s*(?:".*"|'.*');?\s*$|^export /mg;
     /**
      * Remove export prefixes
      */
