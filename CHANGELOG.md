@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.4
+
+- Update deps
+
 ## 0.4.3
 
 - Fix export pattern
