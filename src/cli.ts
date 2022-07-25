@@ -13,7 +13,7 @@ const program = new Program('dts2md', {
 
 program
     .action({
-        name: 'globs...',
+        name: '<globs...>',
         help: `Source file globs (default: ${defaults.glob})`
     })
     .option({
